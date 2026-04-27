@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* HealthChat design system — calming teal/green tones evoking trust & care */
+
+@layer base {
+  :root {
+    --background: 150 30% 98%;
+    --foreground: 175 25% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 175 25% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 175 25% 12%;
+
+    --primary: 172 66% 38%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 172 70% 50%;
+
+    --secondary: 160 30% 94%;
+    --secondary-foreground: 175 25% 18%;
+
+    --muted: 160 20% 95%;
+    --muted-foreground: 175 12% 42%;
+
+    --accent: 165 60% 92%;
+    --accent-foreground: 172 66% 28%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 160 20% 88%;
+    --input: 160 20% 90%;
+    --ring: 172 66% 38%;
+
+    --radius: 0.875rem;
+
+    /* Chat-specific tokens */
+    --user-bubble: 172 66% 38%;
+    --user-bubble-foreground: 0 0% 100%;
+    --assistant-bubble: 0 0% 100%;
+    --assistant-bubble-foreground: 175 25% 12%;
+
+    --sidebar-background: 170 25% 96%;
+    --sidebar-foreground: 175 20% 20%;
+    --sidebar-primary: 172 66% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 165 40% 90%;
+    --sidebar-accent-foreground: 172 66% 24%;
+    --sidebar-border: 160 20% 86%;
+    --sidebar-ring: 172 66% 38%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(172 66% 38%), hsl(165 70% 48%));
+    --gradient-subtle: linear-gradient(180deg, hsl(150 30% 98%), hsl(160 25% 95%));
+    --shadow-soft: 0 2px 12px -2px hsl(172 40% 30% / 0.08);
+    --shadow-bubble: 0 1px 2px hsl(175 25% 12% / 0.04), 0 2px 8px hsl(175 25% 12% / 0.04);
+    --shadow-glow: 0 0 32px hsl(172 70% 50% / 0.25);
+
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 195 30% 7%;
+    --foreground: 160 15% 92%;
+
+    --card: 195 25% 10%;
+    --card-foreground: 160 15% 92%;
+
+    --popover: 195 25% 10%;
+    --popover-foreground: 160 15% 92%;
+
+    --primary: 172 70% 48%;
+    --primary-foreground: 195 30% 7%;
+    --primary-glow: 172 80% 60%;
+
+    --secondary: 195 20% 14%;
+    --secondary-foreground: 160 15% 92%;
+
+    --muted: 195 20% 13%;
+    --muted-foreground: 160 10% 60%;
+
+    --accent: 172 40% 18%;
+    --accent-foreground: 172 70% 70%;
+
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 195 20% 18%;
+    --input: 195 20% 16%;
+    --ring: 172 70% 48%;
+
+    --user-bubble: 172 66% 42%;
+    --user-bubble-foreground: 0 0% 100%;
+    --assistant-bubble: 195 25% 12%;
+    --assistant-bubble-foreground: 160 15% 92%;
+
+    --sidebar-background: 195 35% 5%;
+    --sidebar-foreground: 160 15% 85%;
+    --sidebar-primary: 172 70% 48%;
+    --sidebar-primary-foreground: 195 30% 7%;
+    --sidebar-accent: 195 25% 12%;
+    --sidebar-accent-foreground: 172 70% 70%;
+    --sidebar-border: 195 20% 14%;
+    --sidebar-ring: 172 70% 48%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(172 70% 42%), hsl(165 75% 50%));
+    --gradient-subtle: linear-gradient(180deg, hsl(195 30% 7%), hsl(195 25% 9%));
+    --shadow-soft: 0 2px 12px -2px hsl(0 0% 0% / 0.4);
+    --shadow-bubble: 0 1px 2px hsl(0 0% 0% / 0.3), 0 2px 8px hsl(0 0% 0% / 0.2);
+    --shadow-glow: 0 0 32px hsl(172 80% 60% / 0.35);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body, #root {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer components {
+  .typing-dot {
+    @apply inline-block w-1.5 h-1.5 rounded-full bg-current opacity-60;
+    animation: typing-bounce 1.2s infinite ease-in-out;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.15s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+  .prose-chat {
+    @apply text-[15px] leading-relaxed;
+  }
+  .prose-chat p { @apply my-1; }
+  .prose-chat p:first-child { @apply mt-0; }
+  .prose-chat p:last-child { @apply mb-0; }
+  .prose-chat strong { @apply font-semibold; }
+  .prose-chat em { @apply italic; }
+  .prose-chat ul { @apply list-disc pl-5 my-2 space-y-1; }
+  .prose-chat ol { @apply list-decimal pl-5 my-2 space-y-1; }
+  .prose-chat code {
+    @apply px-1.5 py-0.5 rounded-md bg-muted text-foreground text-[0.875em] font-mono;
+  }
+  .prose-chat pre {
+    @apply bg-muted text-foreground rounded-lg p-3 my-2 overflow-x-auto text-sm;
+  }
+  .prose-chat pre code {
+    @apply bg-transparent p-0 text-[0.9em];
+  }
+  .prose-chat a {
+    @apply text-primary underline underline-offset-2 hover:opacity-80;
+  }
+  .prose-chat h1, .prose-chat h2, .prose-chat h3 {
+    @apply font-semibold mt-3 mb-1;
+  }
+  .prose-chat blockquote {
+    @apply border-l-2 border-primary/40 pl-3 italic text-muted-foreground my-2;
+  }
+
+  .user-bubble .prose-chat code {
+    @apply bg-white/20 text-current;
+  }
+  .user-bubble .prose-chat pre {
+    @apply bg-black/20 text-current;
+  }
+  .user-bubble .prose-chat a {
+    @apply text-current;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 3px;
+  }
+}
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.3); }
+  50% { box-shadow: 0 0 0 8px hsl(var(--primary) / 0); }
+}
